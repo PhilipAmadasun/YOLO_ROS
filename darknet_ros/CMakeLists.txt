@@ -46,9 +46,16 @@ if ( X11_FOUND )
   message ( STATUS " X11_LIBRARIES: " ${X11_LIBRARIES} )
 endif ( X11_FOUND )
 
+
+
+
 # Find rquired packeges
 find_package(Boost REQUIRED COMPONENTS thread)
 find_package(OpenCV 3.2.0 REQUIRED COMPONENTS core highgui imgproc imgcodecs)
+
+message(STATUS "OpenCV Libraries: ${OpenCV_LIBRARIES}")
+message(STATUS "OpenCV Include Directories: ${OpenCV_INCLUDE_DIRS}")
+
 include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(catkin REQUIRED
   COMPONENTS
@@ -93,6 +100,8 @@ include_directories(
 set(PROJECT_LIB_FILES
     src/YoloObjectDetector.cpp                    src/image_interface.cpp
 )
+
+
 
 set(DARKNET_CORE_FILES
     ${DARKNET_PATH}/src/activation_layer.cpp      ${DARKNET_PATH}/src/activations.cpp
@@ -165,8 +174,13 @@ else()
   add_library(${PROJECT_NAME}_lib
     ${PROJECT_LIB_FILES} ${DARKNET_CORE_FILES}
   )
+  
+ execute_process(COMMAND pkg-config --libs opencv
+                OUTPUT_VARIABLE OpenCV_LIBS
+                OUTPUT_STRIP_TRAILING_WHITESPACE)
+  target_link_libraries(${PROJECT_NAME}_lib ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${X11_LIBRARIES})
 
-  add_executable(${PROJECT_NAME}
+  add_executable(${PROJECT_NAME} 
     src/yolo_object_detector_node.cpp
   )
 
