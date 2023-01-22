@@ -1,3 +1,4 @@
+From [darknet_ros repo](https://github.com/leggedrobotics/darknet_ros), but build for ROS-melodic
 # YOLO ROS: Real-Time Object Detection for ROS
 
 ## Overview
