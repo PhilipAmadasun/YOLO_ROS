@@ -1,4 +1,4 @@
-From [darknet_ros repo](https://github.com/leggedrobotics/darknet_ros), but build for ROS-melodic
+From [darknet_ros repo](https://github.com/leggedrobotics/darknet_ros), built for ROS-melodic with OpenCV version 3.2.0.
 # YOLO ROS: Real-Time Object Detection for ROS
 
 ## Overview
